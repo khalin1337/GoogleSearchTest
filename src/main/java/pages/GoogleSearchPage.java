@@ -21,6 +21,6 @@ public class GoogleSearchPage {
     }
 
     public void clickSearchButton() {
-        driver.findElement(searchButton).submit(); // submit працює навіть, якщо кнопка невидима
+        driver.findElement(searchButton).submit();
     }
 }
