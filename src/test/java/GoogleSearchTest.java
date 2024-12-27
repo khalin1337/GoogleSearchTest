@@ -29,7 +29,8 @@ public class GoogleSearchTest {
 
     @DataProvider(name = "searchKeywords")
     public Object[] searchKeywords() {
-        return new Object[]{"Java"};
+        String keyword = System.getProperty("searchKeyword","Java");
+        return new Object[]{keyword};
     }
 
     @Test(dataProvider = "searchKeywords")
@@ -37,12 +38,10 @@ public class GoogleSearchTest {
         // Відкрити Google
         driver.get("https://www.google.com");
 
-        // Використання Page Object для пошуку
         GoogleSearchPage searchPage = new GoogleSearchPage(driver);
         searchPage.enterSearchKeyword(keyword);
         searchPage.clickSearchButton();
 
-        // Використання Page Object для перевірки результатів
         GoogleResultsPage resultsPage = new GoogleResultsPage(driver);
         Assert.assertTrue(resultsPage.isResultsPageLoaded(), "Results page did not load.");
         Assert.assertTrue(resultsPage.allResultsContainKeyword(keyword),
